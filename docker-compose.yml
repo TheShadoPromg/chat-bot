@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+  web:
+    build: .
+    volumes:
+      - /home/chatbot/BOT_DT/settings.py:/chatbot/BOT_DT/settings.py
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=chatbot
+      - POSTGRES_USER=doadmin
+      - POSTGRES_PASSWORD=w5LxdSkKPWWxhtji
+    restart: always
