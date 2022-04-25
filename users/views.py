@@ -1,6 +1,8 @@
 # Django
 from users.models import Cliente, Gasto, Categoria, Ingreso
 from django.db.models import Count, Sum
+from django.utils import timezone
+
 
 # DRF
 from rest_framework import views
@@ -8,6 +10,10 @@ from rest_framework.response import Response
 
 # others
 import requests
+from datetime import date, datetime, timedelta
+from datetime import timedelta
+from dateutil.relativedelta import relativedelta
+
 
 
 def registrar_gasto(url, headers, cliente, categoria, monto, mensaje):
@@ -74,41 +80,98 @@ def registrar_ingreso(url, headers, cliente, categoria, monto):
     # return Response(status=200)
 
 
-def get_resumen(url, headers, cliente, periodo):
+def get_resumen(url, headers, cliente, periodo, tipo):
     print('resumen')
-    
-    try:
-        result = (Gasto.objects
-            .filter(cliente=cliente)
-            .values('categoria__nombre')
-            .annotate(monto=Sum('monto'))
-            .order_by()
-        )
-      
-        mensaje = []
-        for i in result:
-            print(f'{i["categoria__nombre"]} - {i["monto"]}')
-            mensaje.append(f'{i["categoria__nombre"]} - {i["monto"]}' + '\n')
+    # print(periodo)
+    if periodo == 'diario':
+        periodo = date.today()
 
-        s=""""""
-
-        for m in mensaje:
-            s += m         
+    # print(periodo)
+    # print('------------------------------')
 
 
-        payload = {"body": [
-            {
-                "type": "text",
-                "text": f'{s}'
-            }
-        ]}
-    except:
-        payload = {"body": [
-            {
-                "type": "text",
-                "text": "No pudiomos obtener su resumen."
-            }
-        ]}
+    # result = (Gasto.objects
+    #             .filter(cliente=cliente, fecha__range=(periodo, periodo))
+    #             .values('categoria__nombre')
+    #             .annotate(monto=Sum('monto'))
+    #             .order_by()
+    #         )
+    semanal = timezone.now().date() - timedelta(days=7)
+    quincenal = timezone.now().date() - timedelta(days=15)
+    mensual = date.today() + relativedelta(months=-1)
+    trimestral = date.today() + relativedelta(months=-3)
+    print(semanal)
+    print(quincenal)
+    print(mensual)
+    print(trimestral)
+
+
+    if tipo == 'resumen-gastos':
+        try:
+            result = (Gasto.objects
+                .filter(cliente=cliente, fecha__range=(quincenal, date.today()))
+                .values('categoria__nombre')
+                .annotate(monto=Sum('monto'))
+                .order_by()
+            )
+        
+            mensaje = []
+            for i in result:
+                # print(f'{i["categoria__nombre"]} - {i["monto"]}')
+                mensaje.append(f'{i["categoria__nombre"]} - {i["monto"]}' + '\n')
+
+            s=""""""
+
+            for m in mensaje:
+                s += m         
+
+
+            payload = {"body": [
+                {
+                    "type": "text",
+                    "text": f'{s}'
+                }
+            ]}
+        except:
+            payload = {"body": [
+                {
+                    "type": "text",
+                    "text": "No pudiomos obtener su resumen."
+                }
+            ]}
+    elif tipo == 'resumen-ingresos':
+        try:
+            result = (Ingreso.objects
+                .filter(cliente=cliente)
+                .values('categoria__nombre')
+                .annotate(monto=Sum('monto'))
+                .order_by()
+            )
+        
+            mensaje = []
+            for i in result:
+                # print(f'{i["categoria__nombre"]} - {i["monto"]}')
+                mensaje.append(f'{i["categoria__nombre"]} - {i["monto"]}' + '\n')
+
+            s=""""""
+
+            for m in mensaje:
+                s += m         
+
+
+            payload = {"body": [
+                {
+                    "type": "text",
+                    "text": f'{s}'
+                }
+            ]}
+        except:
+            payload = {"body": [
+                {
+                    "type": "text",
+                    "text": "No pudiomos obtener su resumen."
+                }
+            ]}
 
     response = requests.request("POST", url, json=payload, headers=headers)
 
@@ -167,6 +230,7 @@ class list_parameters(views.APIView):
 
         contact_id = request.data['originalDetectIntentRequest']['payload']['contact']['cId']
         nombre = request.data['originalDetectIntentRequest']['payload']['body']['contacts'][0]['profile']['name']
+        tipo = request.data['queryResult']['action']
 
 
         url = f'https://app.respond.io/api/v1/message/sendContent/{contact_id}'
@@ -182,10 +246,10 @@ class list_parameters(views.APIView):
 
 
         if resumen:
-            get_resumen(url, headers, cliente, periodo_reporte)
-        elif request.data['queryResult']['action'] == 'registro-gasto':
+            get_resumen(url, headers, cliente, periodo_reporte, tipo)
+        elif tipo == 'registro-gasto':
             registrar_gasto(url, headers, cliente, categoria, monto, mensaje)
-        elif request.data['queryResult']['action'] == 'registro-ingresos':
+        elif tipo == 'registro-ingresos':
             registrar_ingreso(url, headers, cliente, categoria, monto)
 
 
