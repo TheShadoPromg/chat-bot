@@ -1,0 +1,100 @@
+{
+   "responseId":"d7b15fef-c6a7-4d7e-875e-991794fad822-74fe87bc",
+   "queryResult":{
+      "queryText":"4500 en salario",
+      "action":"registro-ingresos",
+      "parameters":{
+         "number":4500.0,
+         "category":[
+            "salario"
+         ]
+      },
+      "allRequiredParamsPresent":true,
+      "fulfillmentText":"Perfecto, su Ingreso fue registrado exitosamente con Ariel 🤖",
+      "fulfillmentMessages":[
+         {
+            "text":{
+               "text":[
+                  "Perfecto, su Ingreso fue registrado exitosamente con Ariel 🤖"
+               ]
+            },
+            "platform":"FACEBOOK"
+         },
+         {
+            "text":{
+               "text":[
+                  "Perfecto, su Ingreso fue registrado exitosamente con Ariel 🤖"
+               ]
+            },
+            "platform":"TELEGRAM"
+         },
+         {
+            "platform":"ACTIONS_ON_GOOGLE",
+            "simpleResponses":{
+               "simpleResponses":[
+                  {
+                     "textToSpeech":"Perfecto, su Ingreso fue registrado exitosamente con Ariel 🤖"
+                  }
+               ]
+            }
+         },
+         {
+            "quickReplies":{
+               "title":"$contact.firstname, ¿Algo más que le gustaría realizar?",
+               "quickReplies":[
+                  "Registrar gastos",
+                  "Ver resumen",
+                  "Volver al inicio",
+                  "Terminar sesión"
+               ]
+            },
+            "platform":"FACEBOOK"
+         },
+         {
+            "text":{
+               "text":[
+                  "Perfecto, su Ingreso fue registrado exitosamente con Ariel 🤖"
+               ]
+            }
+         }
+      ],
+      "intent":{
+         "name":"projects/arielbot-kukjgm/agent/intents/ac5e115d-bb6c-474e-84ab-6bca74bb6ef1",
+         "displayName":"Income_without_currency"
+      },
+      "intentDetectionConfidence":1.0,
+      "languageCode":"es"
+   },
+   "originalDetectIntentRequest":{
+      "payload":{
+         "body":{
+            "messages":[
+               {
+                  "text":{
+                     "body":"4500 en salario"
+                  },
+                  "timestamp":"1650645005",
+                  "type":"text",
+                  "id":"ABGGGAmCBxQfAgo-sNSZ0AOsh5Dg",
+                  "from":"18492505771"
+               }
+            ],
+            "contacts":[
+               {
+                  "wa_id":"18492505771",
+                  "profile":{
+                     "name":"Joel Peralta"
+                  }
+               }
+            ]
+         },
+         "contact":{
+            "cId":"18492505771",
+            "contactId":29895345.0,
+            "channelId":86949.0
+         },
+         "source":"360dialog_whatsapp"
+      }
+   },
+   "session":"projects/arielbot-kukjgm/agent/sessions/v-2-29895345"
+}

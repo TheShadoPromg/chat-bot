@@ -1,0 +1,68 @@
+{
+   "responseId":"3556cc4b-8c43-42cf-8044-ab1d0d15c328-74fe87bc",
+   "queryResult":{
+      "queryText":"Mensual",
+      "action":"resumen-ingresos",
+      "parameters":{
+         "periodo-reporte":"mensuales"
+      },
+      "allRequiredParamsPresent":true,
+      "fulfillmentText":"Este es el resumen de sus ingresos mensuales👇🏼",
+      "fulfillmentMessages":[
+         {
+            "text":{
+               "text":[
+                  "Este es el resumen de sus ingresos mensuales👇🏼"
+               ]
+            }
+         }
+      ],
+      "intent":{
+         "name":"projects/arielbot-kukjgm/agent/intents/1b6d9fc4-aa9d-4603-b2e8-dfa8712a4290",
+         "displayName":"resumen - Ingresos - periodos"
+      },
+      "intentDetectionConfidence":1.0,
+      "languageCode":"es"
+   },
+   "originalDetectIntentRequest":{
+      "payload":{
+         "source":"360dialog_whatsapp",
+         "contact":{
+            "contactId":29909215.0,
+            "cId":"18492505771",
+            "channelId":86949.0
+         },
+         "body":{
+            "messages":[
+               {
+                  "context":{
+                     "id":"gBGGGEklBXcfAgl6ycMHSK0nlAE",
+                     "from":"18093697532"
+                  },
+                  "timestamp":"1650737560",
+                  "type":"interactive",
+                  "id":"ABGGGEklBXcfAgo6PMI_pabJKkkN",
+                  "from":"18492505771",
+                  "interactive":{
+                     "list_reply":{
+                        "title":"Mensual",
+                        "id":"Mensual",
+                        "description":""
+                     },
+                     "type":"list_reply"
+                  }
+               }
+            ],
+            "contacts":[
+               {
+                  "profile":{
+                     "name":"Joel Peralta"
+                  },
+                  "wa_id":"18492505771"
+               }
+            ]
+         }
+      }
+   },
+   "session":"projects/arielbot-kukjgm/agent/sessions/v-2-29909215"
+}

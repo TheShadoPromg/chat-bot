@@ -64,3 +64,24 @@ class Gasto(BaseModel):
 
     def __str__(self):
         return f'{self.cliente.nombre}-{self.categoria.nombre}'
+
+
+class Ingreso(BaseModel):
+
+    @staticmethod
+    def get_reference_type():
+        return 'ING'
+
+    class Meta:
+        verbose_name = ('Ingreso')
+        verbose_name_plural = ('Ingresos')
+
+
+    cliente = models.ForeignKey('Cliente',verbose_name=('Cliente'), on_delete=models.PROTECT)
+    categoria = models.ForeignKey('Categoria',verbose_name=('Categoria'), on_delete=models.PROTECT)
+    monto = models.PositiveBigIntegerField(verbose_name=('Monto'), default=0)
+    fecha = models.DateField(verbose_name=('Fecha'), default=date.today())
+
+
+    def __str__(self):
+        return f'{self.cliente.nombre}-{self.categoria.nombre}'

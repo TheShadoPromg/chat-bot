@@ -1,0 +1,101 @@
+{
+   "responseId":"d2e8a1bf-c5f0-4b35-8c4f-008478fe1af1-74fe87bc",
+   "queryResult":{
+      "queryText":"22 comida",
+      "action":"registro-gasto",
+      "parameters":{
+         "number":22.0,
+         "category":[
+            "comidas y bebidas"
+         ],
+         "any":""
+      },
+      "allRequiredParamsPresent":true,
+      "fulfillmentText":"Perfecto, su gasto fue registrado exitosamente con Ariel 🤖",
+      "fulfillmentMessages":[
+         {
+            "text":{
+               "text":[
+                  "Perfecto, su gasto fue registrado exitosamente con Ariel 🤖"
+               ]
+            },
+            "platform":"FACEBOOK"
+         },
+         {
+            "text":{
+               "text":[
+                  "Perfecto, su gasto fue registrado exitosamente con Ariel 🤖"
+               ]
+            },
+            "platform":"TELEGRAM"
+         },
+         {
+            "platform":"ACTIONS_ON_GOOGLE",
+            "simpleResponses":{
+               "simpleResponses":[
+                  {
+                     "textToSpeech":"Perfecto, su gasto fue registrado exitosamente con Ariel 🤖"
+                  }
+               ]
+            }
+         },
+         {
+            "quickReplies":{
+               "title":"$contact.firstname, ¿Algo más que le gustaría realizar?",
+               "quickReplies":[
+                  "Registrar ingresos",
+                  "Ver resumen",
+                  "Volver al inicio",
+                  "Terminar sesión"
+               ]
+            },
+            "platform":"FACEBOOK"
+         },
+         {
+            "text":{
+               "text":[
+                  "Perfecto, su gasto fue registrado exitosamente con Ariel 🤖"
+               ]
+            }
+         }
+      ],
+      "intent":{
+         "name":"projects/arielbot-kukjgm/agent/intents/54724765-15c8-450b-990b-7e142e210135",
+         "displayName":"Expenses_without_currency"
+      },
+      "intentDetectionConfidence":1.0,
+      "languageCode":"es"
+   },
+   "originalDetectIntentRequest":{
+      "payload":{
+         "contact":{
+            "cId":"18492505771",
+            "channelId":86949.0,
+            "contactId":29909215.0
+         },
+         "body":{
+            "contacts":[
+               {
+                  "wa_id":"18492505771",
+                  "profile":{
+                     "name":"Joel Peralta"
+                  }
+               }
+            ],
+            "messages":[
+               {
+                  "id":"ABGGGEklBXcfAgo6tPKEq3Xf1OnY",
+                  "type":"text",
+                  "text":{
+                     "body":"22 comida"
+                  },
+                  "from":"18492505771",
+                  "timestamp":"1650572478"
+               }
+            ]
+         },
+         "source":"360dialog_whatsapp"
+      }
+   },
+   "session":"projects/arielbot-kukjgm/agent/sessions/v-2-29909215"
+}
