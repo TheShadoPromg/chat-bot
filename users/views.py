@@ -44,6 +44,10 @@ def registrar_ingreso(url, headers, cliente, categoria, monto):
     print('ingresos')
 
     try:
+        if isinstance(monto, list):
+            # print(monto)
+            monto = monto[0]
+        # print(monto)
         ingreso = Ingreso()
         ingreso.cliente = cliente
         ingreso.categoria = categoria
@@ -67,6 +71,7 @@ def registrar_ingreso(url, headers, cliente, categoria, monto):
     response = requests.request("POST", url, json=payload, headers=headers)
 
     return Response(status=response.status_code)
+    # return Response(status=200)
 
 
 def get_resumen(url, headers, cliente, periodo):
@@ -101,7 +106,7 @@ def get_resumen(url, headers, cliente, periodo):
         payload = {"body": [
             {
                 "type": "text",
-                "text": "No pudiomos obtener el resumen de sus gastos."
+                "text": "No pudiomos obtener su resumen."
             }
         ]}
 
@@ -114,15 +119,15 @@ def get_resumen(url, headers, cliente, periodo):
 class list_parameters(views.APIView):
 
     def post(self, request):
-        print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
-        print('   ')
-        print('   ')
-        print('   ')
-        print('   ')
-        print('   ')
-        print('   ')
-        print('   ')
-        print(request.data)
+        # print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+        # print('   ')
+        # print('   ')
+        # print('   ')
+        # print('   ')
+        # print('   ')
+        # print('   ')
+        # print('   ')
+        # print(request.data)
         telegram_token = '3de05bd610c883cae1c7f27c924071543ce73662f0319b996f9f6991176b9e6a5a649f9962137504b68b0b66f1cfe6434e5151809a314ea1c0651c4fcb4be208'
         ws_token = 'efaa72594d1aa8a7122be3c49b65c8a7b65f4b943744c79015eb0c64689500b28d4fd15a435a0b5ff7802c1c963abde3983786e9a83a027954d448cfd898729d'
         ariel_token = 'f85ef8efec71f0e6c066f9cab1f20a4febad1c9d9f0fb08383b01a8976f7c2585be5edae6186399ec7a7da779074108a456b3038aef4187b0c73c822b1e6c4d6'
