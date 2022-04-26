@@ -11,3 +11,4 @@ shortuuid==1.0.8
 sqlparse==0.4.2
 zipp==3.7.0
 requests==2.27.1
+python-dateutil==2.8.2
