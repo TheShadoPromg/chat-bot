@@ -82,34 +82,23 @@ def registrar_ingreso(url, headers, cliente, categoria, monto):
 
 def get_resumen(url, headers, cliente, periodo, tipo):
     print('resumen')
-    # print(periodo)
+
     if periodo == 'diario':
         periodo = date.today()
-
-    # print(periodo)
-    # print('------------------------------')
-
-
-    # result = (Gasto.objects
-    #             .filter(cliente=cliente, fecha__range=(periodo, periodo))
-    #             .values('categoria__nombre')
-    #             .annotate(monto=Sum('monto'))
-    #             .order_by()
-    #         )
-    semanal = timezone.now().date() - timedelta(days=7)
-    quincenal = timezone.now().date() - timedelta(days=15)
-    mensual = date.today() + relativedelta(months=-1)
-    trimestral = date.today() + relativedelta(months=-3)
-    print(semanal)
-    print(quincenal)
-    print(mensual)
-    print(trimestral)
+    elif periodo == 'semanal':
+        periodo = timezone.now().date() - timedelta(days=7)
+    elif periodo == 'quincenal':
+        periodo = timezone.now().date() - timedelta(days=15)
+    elif periodo == 'mensual':
+        periodo = date.today() + relativedelta(months=-1)
+    elif periodo == 'trimestral':
+        periodo = date.today() + relativedelta(months=-3)
 
 
     if tipo == 'resumen-gastos':
         try:
             result = (Gasto.objects
-                .filter(cliente=cliente, fecha__range=(quincenal, date.today()))
+                .filter(cliente=cliente, fecha__range=(periodo, date.today()))
                 .values('categoria__nombre')
                 .annotate(monto=Sum('monto'))
                 .order_by()
@@ -142,7 +131,7 @@ def get_resumen(url, headers, cliente, periodo, tipo):
     elif tipo == 'resumen-ingresos':
         try:
             result = (Ingreso.objects
-                .filter(cliente=cliente)
+                .filter(cliente=cliente, fecha__range=(periodo, date.today()))
                 .values('categoria__nombre')
                 .annotate(monto=Sum('monto'))
                 .order_by()
