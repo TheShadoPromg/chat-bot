@@ -83,16 +83,18 @@ def registrar_ingreso(url, headers, cliente, categoria, monto):
 def get_resumen(url, headers, cliente, periodo, tipo):
     print('resumen')
 
-    if periodo == 'diario':
+    if periodo == 'diarios':
         periodo = date.today()
-    elif periodo == 'semanal':
+    elif periodo == 'semanales':
         periodo = timezone.now().date() - timedelta(days=7)
-    elif periodo == 'quincenal':
+    elif periodo == 'quincenales':
         periodo = timezone.now().date() - timedelta(days=15)
-    elif periodo == 'mensual':
+    elif periodo == 'mensuales':
         periodo = date.today() + relativedelta(months=-1)
-    elif periodo == 'trimestral':
+    elif periodo == 'trimestrales':
         periodo = date.today() + relativedelta(months=-3)
+    else:
+        periodo = date.today()
 
 
     if tipo == 'resumen-gastos':
