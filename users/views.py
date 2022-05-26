@@ -40,9 +40,9 @@ def registrar_gasto(url, headers, cliente, categoria, monto, mensaje):
             }
         ]}
 
-    response = requests.request("POST", url, json=payload, headers=headers)
+    # response = requests.request("POST", url, json=payload, headers=headers)
 
-    return Response(status=response.status_code)
+    return Response(200)
 
 
 def registrar_ingreso(url, headers, cliente, categoria, monto):
