@@ -17,6 +17,7 @@ from dateutil.relativedelta import relativedelta
 
 def registrar_gasto(url, headers, cliente, categoria, monto, mensaje):
     print('gastos')
+    print('000000000000000000000000000000000000000000000')
 
     try:
         gasto = Gasto()
