@@ -48,6 +48,8 @@ def registrar_gasto(url, headers, cliente, categoria, monto, mensaje):
 
 def registrar_ingreso(url, headers, cliente, categoria, monto):
     print('ingresos')
+    print('111111111111111111111111111111111111111111111')
+
 
     try:
         if isinstance(monto, list):
@@ -72,10 +74,10 @@ def registrar_ingreso(url, headers, cliente, categoria, monto):
             }
         ]}
 
-    response = requests.request("POST", url, json=payload, headers=headers)
+    # response = requests.request("POST", url, json=payload, headers=headers)
 
-    return Response(status=response.status_code)
-    # return Response(status=200)
+    # return Response(status=response.status_code)
+    return Response(status=200)
 
 
 def get_resumen(url, headers, cliente, periodo):
@@ -213,9 +215,9 @@ class list_parameters(views.APIView):
 
         if resumen:
             get_resumen(url, headers, cliente, periodo_reporte)
-        elif tipo == 'registro-gasto':
-            registrar_gasto(url, headers, cliente, categoria, monto, mensaje)
-        elif tipo == 'registro-ingresos':
-            registrar_ingreso(url, headers, cliente, categoria, monto)
+        # elif tipo == 'registro-gasto':
+        #     registrar_gasto(url, headers, cliente, categoria, monto, mensaje)
+        # elif tipo == 'registro-ingresos':
+        #     registrar_ingreso(url, headers, cliente, categoria, monto)
 
         return Response(status=200)
